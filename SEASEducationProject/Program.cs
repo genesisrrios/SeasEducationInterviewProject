@@ -26,9 +26,3 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
-
-
-
-
-
-//.AddPageRoute("/Employees/Index", "");
