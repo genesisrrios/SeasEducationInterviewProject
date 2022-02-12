@@ -3,3 +3,32 @@
 @{
     ViewData["Title"] = "Who puts water in boxes?";
 }
+<form method="post">
+    <div class="mb-3">
+      <label asp-for="@Model.BoxModel.Length" class="form-label"></label>
+      <input asp-for="@Model.BoxModel.Length" type="text" class="form-control" id="Length" placeholder="please enter length">
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="@Model.BoxModel.Width" class="form-label"></label>
+      <input asp-for="@Model.BoxModel.Width" type="text" class="form-control" id="Width" placeholder="please enter width">
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="@Model.BoxModel.Height" class="form-label"></label>
+      <input asp-for="@Model.BoxModel.Height" type="text" class="form-control" id="Height" placeholder="Please enter height">
+    </div>
+    @if (Model.Result.Length > 0)
+    {
+        <div class="row">
+            <span class="text-success" id="Result">@Model.Result</span>
+        </div>        
+    }
+    @if (Model.ErrorMessage.Length > 0)
+    {
+        <div class="row">
+            <span class="text-danger" id="ErrorMessage">@Model.ErrorMessage</span>
+        </div>        
+    }
+    <button  type="submit" class="btn btn-primary">Calculate</button>
+</form>
