@@ -1,0 +1,91 @@
+﻿@page
+@model SEASEducationProject.Pages.FizzBuzzModel
+
+
+<div class="mb-3">
+  <label for="Value" class="form-label">Value</label>
+  <input type="text" class="form-control" id="Value" placeholder="please enter value">
+</div>
+
+<div class="mb-3">
+  <label for="Fizz" class="form-label">Fizz</label>
+  <input type="text" class="form-control" id="Fizz" placeholder="please enter fizz">
+</div>
+
+<div class="mb-3">
+  <label for="Buzz" class="form-label">Buzz</label>
+  <input type="text" class="form-control" id="Buzz" placeholder="Please enter buzz">
+</div>
+<div class="row">
+    <span class="text-success" id="Result"></span>
+</div>
+<div class="row">
+    <span class="text-danger" id="ErrorMessage"></span>
+</div>
+<button type="button" onclick="onSubmit()" class="btn btn-primary">Do FizzBuzz</button>
+
+@section Scripts {
+    <script type="text/javascript">
+    let fizzInputVal = 0;
+    let buzzInputVal = 0;
+    let valueInputVal = 0;
+    function onSubmit() 
+    {
+        assignInputValues();
+        if (validateInputValues()){
+            let message = "";
+            let divisibleByFizz = isDivisibleByFizz(fizzInputVal, valueInputVal)
+            let isDivisibleByBuzz = isDivisibleByFizz(buzzInputVal, valueInputVal)
+            
+            if(divisibleByFizz) message += "Fizz";
+            if(isDivisibleByBuzz) message += "Buzz";
+            if(!divisibleByFizz && !isDivisibleByBuzz) message = valueInputVal;
+            document.getElementById("Result").innerHTML = message;
+        }
+    } 
+    let validateInputValues = () => 
+    {
+        let message = "{0} must be a numerical value";
+        document.getElementById("ErrorMessage").innerHTML = "";
+
+        let validationErrorCount = 0;
+        if (isNaN(fizzInputVal)) {
+            document.getElementById("ErrorMessage").innerHTML += message.replace("{0}","Fizz"); 
+            validationErrorCount++;
+        }
+
+        if (isNaN(valueInputVal)){
+            if (validationErrorCount > 0)
+                document.getElementById("ErrorMessage").innerHTML += `, ${message.replace("{0}", "Value")}`;  
+            else
+                document.getElementById("ErrorMessage").innerHTML += `${message.replace("{0}", "Value")}`;  
+            validationErrorCount++;
+        }
+
+        if (isNaN(buzzInputVal)){
+            if(validationErrorCount > 0)
+                document.getElementById("ErrorMessage").innerHTML +=  ` and ${message.replace("{0}", "Buzz")}.`; 
+            else
+                document.getElementById("ErrorMessage").innerHTML +=  `${message.replace("{0}", "Buzz")}.`;
+            validationErrorCount++;
+        }
+        return validationErrorCount === 0;
+    }
+
+    let assignInputValues = () => 
+    {
+        valueInputVal = document.getElementById("Value").value;
+        fizzInputVal = document.getElementById("Fizz").value;
+        buzzInputVal = document.getElementById("Buzz").value;
+    }
+
+    let isDivisibleByFizz = (fizz, value) => {
+        if ((value % fizz) === 0) return true
+        return false
+    }
+    let isDivisibleByBuzz = (buzz, value) => {
+        if ((value % fizz) === 0) return true;
+        return false
+    }
+    </script>
+}
