@@ -1,7 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AddPageRoute("/FizzBuzz", "/");
+});
 
 var app = builder.Build();
 
@@ -23,3 +26,9 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+
+
+
+
+//.AddPageRoute("/Employees/Index", "");
