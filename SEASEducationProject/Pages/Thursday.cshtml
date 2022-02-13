@@ -3,3 +3,34 @@
 @{
     ViewData["Title"] = "Every Second Thursday of the week";
 }
+<form method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label asp-for="FileUpload" class="form-label">Upload CSV</label>
+        <input type="file" asp-for="FileUpload" class="form-control"/>
+      </div>
+    <button class="btn btn-primary" type="submit">Submit CSV</button>
+</form>
+@if(Model.NamesAndDates != null && Model.NamesAndDates.Any())
+{
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                    @foreach(var nameAndDate in Model.NamesAndDates)
+                    {
+                    <tr>
+                        <td>@nameAndDate.Name</td>
+                        <td>@nameAndDate.Date</td>
+                    </tr>                        
+                    }
+              </tbody>
+            </table>
+        </div>
+    </div>   
+}
