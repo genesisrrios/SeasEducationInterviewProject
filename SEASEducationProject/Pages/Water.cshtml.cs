@@ -8,7 +8,7 @@ namespace SEASEducationProject.Pages
     public class WaterModel : PageModel
     {
         [BindProperty]
-        public Box BoxModel { get; set; }
+        public Box BoxModel { get; set; } = new Box();
         public string ErrorMessage { get; set; } = String.Empty;
         public string Result { get; set; } = String.Empty;
         public void OnGet()
