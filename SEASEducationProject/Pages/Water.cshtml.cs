@@ -21,8 +21,8 @@ namespace SEASEducationProject.Pages
                 var volume = BoxModel.Volume;
                 var boxVolumeInmilliliters = volume * (decimal)16.3871;
                 var boxVolumeInliters = boxVolumeInmilliliters / 1000;
-                var wholeVolumeNumberInLiters = Math.Truncate(Math.Round(boxVolumeInliters, 4));
-                Result = $"For a box with a volume of {volume} inches the difference betwen millimeters and the next liter is { boxVolumeInliters - boxVolumeInmilliliters }.";
+                var wholeVolumeNumberInLiters = Math.Round(boxVolumeInliters);
+                Result = $"For a box with a volume of {volume} inches the difference in millimeters between {wholeVolumeNumberInLiters}L and the volume is: { Math.Round(boxVolumeInmilliliters - wholeVolumeNumberInLiters, 4) }mL.";
             }
             else
             {
