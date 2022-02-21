@@ -16,19 +16,25 @@ namespace SEASEducationProject.Pages
         }
         public void OnPost()
         {
+            //4 5 6 - 33.5480
             if (ModelState.IsValid)
             {
                 var volume = BoxModel.Volume;
                 var boxVolumeInmilliliters = volume * (decimal)16.3871;
                 var boxVolumeInliters = boxVolumeInmilliliters / 1000;
-                var wholeVolumeNumberInLiters = Math.Round(boxVolumeInliters);
-                Result = $"For a box with a volume of {volume} inches the difference in millimeters between {wholeVolumeNumberInLiters}L and the volume is: { Math.Round(boxVolumeInmilliliters - wholeVolumeNumberInLiters, 4) }mL.";
+                var wholeVolumeNumberInLiters = Math.Ceiling(boxVolumeInliters);
+                var wholeVolumeNumberInMililiters = wholeVolumeNumberInLiters * 1000;
+                var calc = Math.Round(wholeVolumeNumberInMililiters - boxVolumeInmilliliters, 4);
+                if (calc == 0) calc = 1000;
+
+                Result = $"For a box with a volume of {volume} inches the difference in millimeters between {wholeVolumeNumberInLiters}L and the volume is: { calc }mL.";
             }
             else
             {
-                ErrorMessage = String.Join(" ", ModelState.Values
+                ErrorMessage = string.Join(" ", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage));
+
             }
         }
     }
